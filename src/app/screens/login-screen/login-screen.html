@@ -1,0 +1,88 @@
+<section class="login">
+  <!-- Wrapper único (mobile-first). El CSS decidirá si se apila o si hace 2 columnas -->
+  <div class="wrapper wrapper-responsive">
+    <!-- Columna izquierda (en mobile queda arriba, en desktop a la izquierda) -->
+    <div class="section-left">
+      <div class="header mt-3 mb-3">
+        <div class="d-flex flex-direction-row justify-content-start justify-content-md-start w-100">
+          <img src="assets/images/logo-marcas.png" class="logo-marca logo-marca-desktop" alt="Logo marcas">
+        </div>
+      </div>
+
+      <!-- Imagen principal -->
+      <div class="content content-left mb-3">
+        <div class="d-flex flex-direction-row justify-content-center justify-content-md-start w-100">
+          <!-- Una sola imagen; el CSS controla tamaño por breakpoint -->
+          <img src="assets/images/login-img-lg.png" class="login-img login-img-desktop" alt="Imagen login">
+        </div>
+      </div>
+    </div>
+
+    <!-- Columna derecha (en mobile queda debajo, en desktop a la derecha) -->
+    <div class="section-right">
+      <div class="login-body">
+        <div class="form-login form-login-desktop">
+          <h1 class="title-login">Inicio de sesión</h1>
+
+          <!-- Correo electrónico -->
+          <mat-form-field class="inputs-login" appearance="outline">
+            <mat-label>Correo Electrónico</mat-label>
+            <input [(ngModel)]="username" (ngModelChange)="onEmailInput()" type="email" matInput placeholder="Ingresa correo electrónico" autocomplete="off">
+          </mat-form-field>
+          @if (errors.username) {
+            <div class="invalid-feedback">{{ errors.username }}</div>
+          }
+
+          <!-- Contraseña -->
+          <mat-form-field class="inputs-login" appearance="outline">
+            <mat-label class="label">Contraseña</mat-label>
+
+             <!-- Mejor práctica: binding -->
+            <input
+              [(ngModel)]="password"
+              (ngModelChange)="onPasswordInput()"
+              [type]="inputType_1"
+              class="input"
+              matInput
+              placeholder="Ingresa contraseña"
+              autocomplete="current-password"
+              (keyup.enter)="login()"
+            >
+            <mat-icon matSuffix class="eye-icon" (click)="showPassword()">
+              {{ hide_1 ? 'visibility_off' : 'visibility' }}
+            </mat-icon>
+          </mat-form-field>
+          @if (errors.password) {
+            <div class="invalid-feedback">{{ errors.password }}</div>
+          }
+
+           <!-- Recuperar contraseña -->
+          <span class="label-pwd" style="cursor: pointer;" (click)="recuperarPwd()">
+            Recupera tu contraseña
+          </span>
+
+          <!-- Botón -->
+          <div class="d-flex flex-direction-row justify-content-center w-100 mt-4 mb-4">
+            <button mat-flat-button type="button" class="btn-login" (click)="login()">
+              <span class="text-btn">Ingresar</span>
+            </button>
+          </div>
+
+          <hr>
+
+          <div class="d-flex flex-direction-row justify-content-center w-100">
+            <span class="txt-registro">
+              ¿Aún no tienes una cuenta?
+              <span class="red" (click)="goRegistro()"> Regístrate</span>
+            </span>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Footer siempre abajo -->
+  <div class="footer-desktop">
+    <img src="assets/images/liston-img.png" class="liston-img" alt="Listón">
+  </div>
+</section>

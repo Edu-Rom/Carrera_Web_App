@@ -1,0 +1,211 @@
+<section class="registro-user">
+  <!-- Wrapper global: mobile-first apilado -->
+  <div class="wrapper">
+    <!-- Columna/Sección izquierda: logo + imagen -->
+    <div class="section-left">
+      <div class="header">
+        <!-- Logo (mismo asset en todas las vistas) -->
+        <img src="/assets/images/logo-marcas.png" class="logo-marca" alt="Carrera Ducati" />
+      </div>
+
+      <!-- Imagen hero (mobile usa login-img, desktop el CSS puede ajustar tamaño) -->
+      <div class="content">
+        <!-- Recomendación: use UNA sola imagen y que CSS la controle.
+             Si usted quiere conservar la versión lg, lo más limpio es usar <picture>. -->
+        <picture>
+          <!-- Desktop (>=1024) -->
+          <source srcset="/assets/images/login-img-lg.png" media="(min-width: 1024px)">
+          <!-- Mobile/Tablet -->
+          <img src="/assets/images/login-img.png" class="login-img" alt="Imagen registro" />
+        </picture>
+      </div>
+    </div>
+    <!-- Columna/Sección derecha: formulario registro -->
+    <div class="section-right">
+      <div class="registro-body">
+        <div class="form-registro">
+          <h1 class="title-login">Regístrate</h1>
+
+          <!-- Nombre -->
+          <mat-form-field class="inputs-login" appearance="outline">
+            <mat-label>Nombre</mat-label>
+            <input [(ngModel)]="user.first_name" (ngModelChange)="onLettersInput('first_name')" type="text" matInput placeholder="Ingresa nombre" maxlength="40" autocomplete="off">
+          </mat-form-field>
+          @if (errors.first_name) {
+          <div class="invalid-feedback">{{ errors.first_name }}</div>
+          }
+
+          <!-- Apellidos -->
+          <mat-form-field class="inputs-login" appearance="outline">
+            <mat-label>Apellidos</mat-label>
+            <input [(ngModel)]="user.last_name" (ngModelChange)="onLettersInput('last_name')" type="text" matInput placeholder="Ingresa apellido" maxlength="60" autocomplete="off">
+          </mat-form-field>
+          @if (errors.last_name) {
+          <div class="invalid-feedback">{{ errors.last_name }}</div>
+          }
+
+          <!-- ID Usuario -->
+          <mat-form-field class="inputs-login" appearance="outline">
+            <mat-label>ID de usuario</mat-label>
+            <input [(ngModel)]="user.user_id" (ngModelChange)="onAlphaNumericInput('user_id')" type="text" matInput placeholder="Ingresa ID de usuario" minlength="8" maxlength="8" autocomplete="off">
+          </mat-form-field>
+          @if (errors.user_id) {
+          <div class="invalid-feedback">{{ errors.user_id }}</div>
+          }
+
+          <!-- Correo -->
+          <mat-form-field class="inputs-login" appearance="outline">
+            <mat-label>Correo Electrónico</mat-label>
+            <input [(ngModel)]="user.email" (ngModelChange)="onEmailInput()" type="email" matInput placeholder="Ingresa correo electrónico" autocomplete="off">
+          </mat-form-field>
+          @if (errors.email) {
+          <div class="invalid-feedback">{{ errors.email }}</div>
+          }
+
+          <!-- Contraseña -->
+          <mat-form-field class="inputs-login" appearance="outline">
+            <mat-label>Contraseña</mat-label>
+            <input [(ngModel)]="user.password" (ngModelChange)="onPasswordInput('password')" [type]="inputType_1" matInput placeholder="Ingresa contraseña" autocomplete="new-password">
+            <mat-icon matSuffix class="eye-icon" (click)="showPassword()">
+              {{ hide_1 ? 'visibility_off' : 'visibility' }}
+            </mat-icon>
+          </mat-form-field>
+          @if (errors.password) {
+          <div class="invalid-feedback">{{ errors.password }}</div>
+          }
+
+          <!-- Confirmar Contraseña -->
+          <mat-form-field class="inputs-login" appearance="outline">
+            <mat-label>Confirmar contraseña</mat-label>
+            <input [(ngModel)]="user.confirm_password" (ngModelChange)="onPasswordInput('confirm_password')" [type]="inputType_2" matInput placeholder="Confirma contraseña" autocomplete="new-password">
+            <mat-icon matSuffix class="eye-icon" (click)="showConfirmPassword()">
+              {{ hide_2 ? 'visibility_off' : 'visibility' }}
+            </mat-icon>
+          </mat-form-field>
+          @if (errors.confirm_password) {
+          <div class="invalid-feedback">{{ errors.confirm_password }}</div>
+          }
+
+          <!-- CURP -->
+          <mat-form-field class="inputs-login" appearance="outline">
+            <mat-label>CURP</mat-label>
+            <input [(ngModel)]="user.curp" (ngModelChange)="onAlphaNumericInput('curp')" type="text" matInput placeholder="Ingresa CURP" maxlength="18" autocomplete="off">
+          </mat-form-field>
+          @if (errors.curp) {
+          <div class="invalid-feedback">{{ errors.curp }}</div>
+          }
+
+          <!-- RFC -->
+          <mat-form-field class="inputs-login" appearance="outline">
+            <mat-label>RFC</mat-label>
+            <input [(ngModel)]="user.rfc" (ngModelChange)="onAlphaNumericInput('rfc')" type="text" matInput placeholder="Ingresa RFC" maxlength="13" autocomplete="off">
+          </mat-form-field>
+          @if (errors.rfc) {
+          <div class="invalid-feedback">{{ errors.rfc }}</div>
+          }
+
+          <!-- Grado de estudios -->
+          <mat-form-field appearance="outline" class="inputs-login">
+            <mat-label>Grado de estudios</mat-label>
+            <mat-select [(ngModel)]="user.grado_estudios" name="grado_estudios">
+              @for (grado of gradosEstudio; track grado.value) {
+              <mat-option [value]="grado.value">
+                {{ grado.label }}
+              </mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+          @if (errors.grado_estudios) {
+          <div class="invalid-feedback">{{ errors.grado_estudios }}</div>
+          }
+
+          <!-- Dirección -->
+          <mat-form-field class="inputs-login" appearance="outline">
+            <mat-label>Dirección</mat-label>
+            <input [(ngModel)]="user.direccion" (ngModelChange)="onLettersInput('direccion')" type="text" matInput placeholder="Ingresa dirección" maxlength="80" autocomplete="off">
+          </mat-form-field>
+          @if (errors.direccion) {
+          <div class="invalid-feedback">{{ errors.direccion }}</div>
+          }
+
+          <!-- Estado -->
+          <mat-form-field appearance="outline" class="inputs-login">
+            <mat-label>Estado</mat-label>
+            <mat-select [(ngModel)]="user.estado" name="estado">
+              @for (estado of estadosRepublica; track estado) {
+              <mat-option [value]="estado">
+                {{ estado }}
+              </mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+          @if (errors.estado) {
+          <div class="invalid-feedback">{{ errors.estado }}</div>
+          }
+
+          <!-- Teléfono -->
+          <mat-form-field class="inputs-login" appearance="outline">
+            <mat-label>Teléfono</mat-label>
+            <input [(ngModel)]="user.telefono" (ngModelChange)="onPhoneInput()" type="text" matInput
+              placeholder="Ingresa teléfono" maxlength="10" autocomplete="off">
+          </mat-form-field>
+          @if (errors.telefono) {
+          <div class="invalid-feedback">{{ errors.telefono }}</div>
+          }
+
+          <!-- Ciudad -->
+          <mat-form-field class="inputs-login" appearance="outline">
+            <mat-label>Ciudad</mat-label>
+            <input [(ngModel)]="user.ciudad" (ngModelChange)="onLettersInput('ciudad')" type="text" matInput placeholder="Ingresa ciudad" maxlength="50" autocomplete="off">
+          </mat-form-field>
+          @if (errors.ciudad) {
+          <div class="invalid-feedback">{{ errors.ciudad }}</div>
+          }
+
+          <!-- Edad -->
+          <mat-form-field appearance="outline" class="inputs-login">
+            <mat-label>Edad</mat-label>
+            <mat-select [(ngModel)]="user.edad" name="edad">
+              @for (edad of edades; track edad.value) {
+              <mat-option [value]="edad.value">
+                {{ edad.value }}
+              </mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+          @if (errors.edad) {
+          <div class="invalid-feedback">{{ errors.edad }}</div>
+          }
+
+          <!-- Términos -->
+          <mat-checkbox class="example-margin" [(ngModel)]="user.terminos_condiciones">
+            Acepto los
+            <span class="label-pwd" (click)="terminosCondiciones()" style="cursor: pointer;">
+              Términos y Condiciones
+            </span>
+          </mat-checkbox>
+          @if (errors.terminos_condiciones) {
+          <div class="invalid-feedback">{{ errors.terminos_condiciones }}</div>
+          }
+
+          <!-- Botón -->
+          <div class="actions">
+            <button mat-flat-button type="button" class="btn-login" (click)="registrar()">
+              <span class="text-btn">Registrarme</span>
+            </button>
+          </div>
+
+          <hr>
+          <!-- Se agrega el botón para ir a login, ya que es común que el usuario se haya equivocado y quiera iniciar sesión en lugar de registrarse. -->
+          <div class="bottom-link">
+            <span class="txt-registro">
+              ¿Ya tienes una cuenta?
+              <span class="red" (click)="goLogin()"> Inicia sesión</span>
+            </span>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

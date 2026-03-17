@@ -1,0 +1,459 @@
+/* =========================================================
+   REGISTRO SCREEN (Angular 20) - Mobile First + Responsive
+   Objetivo:
+   - 1 solo HTML (sin ngIf) y que el SCSS controle TODO.
+   - Mobile/Tablet: layout apilado, centrado, sin overflow.
+   - Desktop: 2 columnas reales (izq: logo+imagen, der: form).
+   - Footer (listón): pegado abajo SIN provocar scroll.
+   - UI/UX: espaciamiento consistente, lectura clara, clics cómodos.
+   ========================================================= */
+
+/* =========================
+1) VARIABLES
+========================= */
+$brand-red: #CD0000;
+$text-black: #000000;
+$hr-gray: #8c8b8b;
+
+/* Breakpoints */
+$bp-tablet: 768px;
+$bp-desktop: 1024px;
+$bp-wide: 1280px;
+
+/* =========================
+   2) CONTENEDOR GLOBAL
+   - “page layout”: contenido crece y footer se pega abajo
+   ========================= */
+.registro-user{
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+
+  /* Evita scroll horizontal por imágenes o flex */
+  overflow-x: hidden;
+}
+
+/* El wrapper contiene las 2 secciones (izq/der) */
+.wrapper{
+  width: 100%;
+  flex: 1; /* ocupa alto disponible y deja footer abajo */
+  display: flex;
+  flex-direction: column; /* mobile-first */
+  align-items: center;
+  justify-content: flex-start;
+
+  padding: 1rem;
+  gap: 1rem;
+
+  min-height: 0; /* evita overflow raro en flex */
+}
+
+/* Footer pegado abajo sin “agrandar” viewport */
+.footer{
+  margin-top: auto;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+
+  padding: 0.5rem 0;
+  overflow: hidden; /* por si el asset tiene 1-2px extra */
+}
+
+.liston-img{
+  width: 56px;
+  height: auto;
+  display: block;
+}
+
+/* =========================
+   3) SECCIONES
+   ========================= */
+.section-left,
+.section-right{
+  width: 100%;
+  min-width: 0; /* importante en flex */
+}
+
+/* IZQUIERDA: logo + imagen */
+.section-left{
+  display: flex;
+  flex-direction: column;
+  align-items: center;  /* centrado en mobile/tablet */
+  justify-content: flex-start;
+  gap: 0.75rem;
+
+  text-align: center;
+}
+
+/* DERECHA: formulario */
+.section-right{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+/* =========================
+   4) HEADER / LOGO
+   ========================= */
+.header{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 0.5rem 0 0.25rem;
+}
+
+.logo-marca{
+  width: min(320px, 100%);
+  height: auto;
+  display: block;
+
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* =========================
+   5) IMAGEN HERO
+   - En HTML usa <picture> + .login-img
+   - El contenedor centra y limita tamaño según breakpoint
+   ========================= */
+.content{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-img{
+  width: min(520px, 100%); /* base más generosa que login porque registro se ve mejor así */
+  height: auto;
+  display: block;
+
+  /* Evita que se coma el alto en móviles chaparros */
+  max-height: 34vh;
+  object-fit: cover;
+
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* =========================
+   6) FORMULARIO
+   ========================= */
+.registro-body{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+/* Contenedor del form */
+.form-registro{
+  width: 100%;
+  max-width: 380px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+
+  gap: 0.75rem;
+  margin: 0;
+}
+
+/* Título */
+.title-login{
+  text-align: left;
+  font-family: Avenir-Bold!important;
+  font-size: 20px;
+  letter-spacing: 0px;
+  color: $text-black;
+  text-transform: uppercase;
+  opacity: 1;
+  margin: 0;
+}
+
+/* Link rojo (Términos / etc.) */
+.label-pwd{
+  text-align: left;
+  font-family: Avenir-Bold!important;
+  font-size: 14px;
+  letter-spacing: 0px;
+  color: $brand-red;
+  opacity: 1;
+}
+
+/* Texto inferior */
+.txt-registro{
+  text-align: center;
+  font-family: Avenir!important;
+  font-size: 16px;
+  letter-spacing: 0px;
+  color: $text-black;
+}
+
+.red{
+  font-family: Avenir-Bold!important;
+  letter-spacing: 0px;
+  color: $brand-red;
+  cursor: pointer;
+}
+
+/* Línea separadora */
+hr{
+  border-top: 2px solid $hr-gray;
+  width: 100%;
+  margin: 0.75rem 0;
+}
+
+/* Contenedores auxiliares (en el HTML unificado) */
+.actions{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: 0.75rem 0 0.25rem;
+}
+
+.bottom-link{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+/* Feedback de errores (ajústelo a su gusto) */
+.invalid-feedback{
+  width: 100%;
+  font-size: 13px;
+  line-height: 1.2;
+  color: $brand-red;
+  margin-top: -0.25rem;
+}
+
+/* =========================
+   7) ANGULAR MATERIAL (controlado)
+   - solo dentro de este componente
+   ========================= */
+
+/* Mat-form-field a full width */
+.mat-mdc-form-field{
+  width: 100%;
+}
+
+/* Labels */
+mat-label{
+  text-align: left;
+  font-family: Avenir;
+  font-size: 16px;
+  letter-spacing: 0px;
+  color: $text-black;
+  opacity: 1;
+}
+
+/* Checkbox un poco más “friendly” en mobile */
+.example-margin{
+  width: 100%;
+  margin-top: 0.25rem;
+}
+
+/* Botón por clase (NO global) */
+.btn-login{
+  background: $brand-red 0% 0% no-repeat padding-box;
+  width: 188px;
+  height: 40px;
+  border-radius: 0;
+  opacity: 1;
+
+  .text-btn{
+    text-align: center;
+    font-family: Avenir;
+    font-size: 17px;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    opacity: 1;
+  }
+}
+
+/* Botón material: mantener su color */
+:host ::ng-deep button.btn-login.mat-mdc-unelevated-button {
+  background-color: #CD0000 !important;
+  color: #FFFFFF !important;
+
+  /* Tokens MDC (por compatibilidad) */
+  --mdc-filled-button-container-color: #CD0000;
+  --mdc-filled-button-label-text-color: #FFFFFF;
+  --mat-filled-button-state-layer-color: #FFFFFF; /* hover/focus layer */
+  --mat-filled-button-ripple-color: rgba(255, 255, 255, 0.2);
+
+  min-width: 188px;
+  height: 40px;
+  border-radius: 0 !important;
+
+  font-family: Avenir, sans-serif !important;
+  font-size: 16px;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+}
+
+/* =========================
+   8) TABLET (>= 768px)
+   - Sigue apilado, pero más “aire” y tamaños más cómodos
+   ========================= */
+@media (min-width: $bp-tablet){
+
+  .wrapper{
+    padding: 2rem;
+    gap: 1.25rem;
+  }
+
+  .logo-marca{
+    width: min(460px, 100%);
+  }
+
+  .login-img{
+    width: min(760px, 100%);
+    max-height: 38vh;
+  }
+
+  .form-registro{
+    max-width: 460px;
+  }
+
+  .btn-login{
+    width: 220px; /* un poco más grande en tablet */
+  }
+}
+
+/* =========================
+   9) DESKTOP (>= 1024px)
+   - 2 columnas reales: izquierda (logo + imagen grande)
+   - derecha: formulario centrado verticalmente
+   - Mantener todo CENTRADO en el viewport (como su “diseño original”)
+   ========================= */
+@media (min-width: $bp-desktop){
+
+  .wrapper{
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    /* que se sienta “centrado” y con buen ancho */
+    max-width: 1400px;
+    margin: 0 auto;
+
+    gap: 3rem;
+    padding: 2.25rem 2rem;
+  }
+
+  /* Izquierda: que realmente use su columna */
+  .section-left{
+    flex: 1 1 60%;
+    align-items: center;   /* CENTRADO como usted pidió */
+    text-align: center;
+    justify-content: center;
+  }
+
+  /* Derecha: form */
+  .section-right{
+    flex: 1 1 40%;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .header{
+    justify-content: center;
+    padding: 0;
+  }
+
+  /* Logo más grande en desktop */
+  .logo-marca{
+    width: min(560px, 95%);
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Imagen hero grande (clave para “usar casi todo el tamaño de la columna izquierda”) */
+  .login-img{
+    width: min(980px, 100%);
+    max-height: 62vh;   /* controla alto para no empujar el form */
+    object-fit: cover;
+  }
+
+  /* Form más ancho, pero con límite amigable */
+  .form-registro{
+    max-width: 560px;
+  }
+
+  /* Botón más “presente” en desktop */
+  .btn-login{
+    width: 240px;
+    height: 44px;
+  }
+}
+
+/* =========================
+   10) DESKTOP WIDE (>= 1280px)
+   - Aumenta todavía un poco la presencia del bloque izquierdo
+   ========================= */
+@media (min-width: $bp-wide){
+
+  .wrapper{
+    gap: 3.5rem;
+    padding: 2.5rem 2.25rem;
+  }
+
+  .logo-marca{
+    width: min(620px, 95%);
+  }
+
+  .login-img{
+    width: min(1100px, 100%);
+    max-height: 66vh;
+  }
+}
+
+/* =========================
+   11) DESKTOP CHAPARRO (altura baja)
+   - Evita overflow vertical (caso típico 1366x768 / 1280x720)
+   ========================= */
+@media (min-width: $bp-desktop) and (max-height: 820px){
+
+  .wrapper{
+    padding: 1.25rem 1.25rem;
+    gap: 2rem;
+  }
+
+  .login-img{
+    max-height: 48vh; /* baja el alto permitido */
+    width: min(920px, 100%);
+  }
+
+  .footer{
+    padding: 0.25rem 0;
+  }
+}
+
+/* =========================
+   12) MICRO-DEVICE (muy angosto)
+   - Evita que se sienta apretado
+   ========================= */
+@media (max-width: 360px){
+
+  .wrapper{
+    padding: 0.75rem;
+  }
+
+  .form-registro{
+    max-width: 320px;
+  }
+
+  .btn-login{
+    width: 170px;
+  }
+}
+
+

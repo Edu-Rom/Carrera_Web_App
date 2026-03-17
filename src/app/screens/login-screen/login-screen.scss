@@ -1,0 +1,383 @@
+/* =========================================================
+   LOGIN SCREEN (Angular 20) - Mobile First + Responsive (FINAL)
+   - HTML unificado (sin ngIf)
+   - Mobile/Tablet: apilado y centrado
+   - Desktop: 2 columnas centradas (izq: logo+img, der: form)
+   - Desktop: logo + imagen MÁS GRANDES (como diseño original)
+   - Footer listón: NO debe agrandar pantalla ni forzar scroll
+   ========================================================= */
+
+/* =========================
+   1) VARIABLES
+   ========================= */
+$brand-red: #CD0000;
+$text-black: #000000;
+$hr-gray: #8c8b8b;
+
+$bp-tablet: 768px;
+$bp-desktop: 1024px;
+$bp-wide: 1200px;
+
+/* =========================
+   2) CONTENEDOR GLOBAL
+   ========================= */
+.login{
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+  background: #fff;
+}
+
+/* Wrapper principal */
+.wrapper{
+  width: 100%;
+  flex: 1;
+
+  display: flex;
+  flex-direction: column; /* mobile-first */
+  align-items: center;
+  justify-content: flex-start;
+
+  padding: 1rem;
+  gap: 1rem;
+
+  min-height: 0;
+}
+
+/* Footer: pegado abajo sin aumentar viewport */
+.footer-desktop{
+  margin-top: auto;
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+
+  padding: 0 0;
+  overflow: hidden;
+}
+
+.liston-img{
+  width: 56px;
+  height: auto;
+  display: block;
+}
+
+/* =========================
+   3) SECCIONES (HTML unificado)
+   ========================= */
+.section-left,
+.section-right{
+  width: 100%;
+  min-width: 0;
+}
+
+/* Izquierda (logo + imagen) centrado en mobile/tablet */
+.section-left{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 0.75rem;
+}
+
+/* Derecha (form) centrado */
+.section-right{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* =========================
+   4) HEADER / LOGO
+   ========================= */
+.header{
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 0.5rem 0 0.25rem;
+}
+
+.logo-marca{
+  width: min(280px, 100%);
+  height: auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* =========================
+   5) IMAGEN (login)
+   ========================= */
+.content{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-img{
+  width: min(360px, 100%);
+  height: auto;
+
+  /* Limita el alto para evitar que “reviente” en pantallas bajitas */
+  max-height: 34vh;
+
+  object-fit: cover;
+  display: block;
+
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* =========================
+   6) FORMULARIO
+   ========================= */
+.login-body{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.form-login{
+  width: 100%;
+  max-width: 360px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+
+  gap: 0.75rem;
+  margin: 0;
+}
+
+.title-login{
+  text-align: left;
+  font-family: Avenir-Bold!important;
+  font-size: 20px;
+  letter-spacing: 0px;
+  color: $text-black;
+  text-transform: uppercase;
+  opacity: 1;
+  margin: 0;
+}
+
+.label-pwd{
+  text-align: left;
+  font-family: Avenir-Bold!important;
+  font-size: 14px;
+  letter-spacing: 0px;
+  color: $brand-red;
+  opacity: 1;
+}
+
+.txt-registro{
+  text-align: center;
+  font-family: Avenir!important;
+  font-size: 16px;
+  letter-spacing: 0px;
+  color: $text-black;
+}
+
+.red{
+  font-family: Avenir-Bold!important;
+  letter-spacing: 0px;
+  color: $brand-red;
+  cursor: pointer;
+}
+
+hr{
+  border-top: 2px solid $hr-gray;
+  width: 100%;
+  margin: 0.75rem 0;
+}
+
+/* =========================
+   7) ANGULAR MATERIAL (controlado)
+   ========================= */
+.mat-mdc-form-field{
+  width: 100%;
+}
+
+mat-label{
+  text-align: left;
+  font-family: Avenir;
+  font-size: 16px;
+  letter-spacing: 0px;
+  color: $text-black;
+  opacity: 1;
+}
+
+/* Botón SOLO por clase */
+.btn-login{
+  background: $brand-red 0% 0% no-repeat padding-box;
+  width: 188px;
+  height: 40px;
+  border-radius: 0;
+  opacity: 1;
+
+  .text-btn{
+    text-align: center;
+    font-family: Avenir;
+    font-size: 17px;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    opacity: 1;
+  }
+}
+
+/* Botón material: mantener su color */
+:host ::ng-deep button.btn-login.mat-mdc-unelevated-button {
+  background-color: #CD0000 !important;
+  color: #FFFFFF !important;
+
+  /* Tokens MDC (por compatibilidad) */
+  --mdc-filled-button-container-color: #CD0000;
+  --mdc-filled-button-label-text-color: #FFFFFF;
+  --mat-filled-button-state-layer-color: #FFFFFF; /* hover/focus layer */
+  --mat-filled-button-ripple-color: rgba(255, 255, 255, 0.2);
+
+  min-width: 188px;
+  height: 40px;
+  border-radius: 0 !important;
+
+  font-family: Avenir, sans-serif !important;
+  font-size: 16px;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+}
+
+/* =========================
+   8) TABLET (>= 768px)
+   ========================= */
+@media (min-width: $bp-tablet){
+  .wrapper{
+    padding: 2rem;
+    gap: 1.25rem;
+  }
+
+  .logo-marca{
+    width: min(420px, 100%);
+  }
+
+  .login-img{
+    width: min(520px, 100%);
+    max-height: 38vh;
+  }
+
+  .form-login{
+    max-width: 420px;
+  }
+}
+
+/* =========================
+   9) DESKTOP (>= 1024px)
+   - 2 columnas centradas
+   - Imagen usa CASI TODO el ancho de la columna izquierda
+   ========================= */
+@media (min-width: $bp-desktop){
+
+  .wrapper{
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    /* más ancho total para que “respire” y la imagen crezca */
+    max-width: 1680px;     /* antes 1440px */
+    width: 100%;
+    margin: 0 auto;
+
+    gap: 3.5rem;           /* separa mejor columnas */
+    padding: 2.5rem;
+  }
+
+  /* Columna izquierda más grande */
+  .section-left{
+    flex: 0 1 68%;         /* antes 60% */
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  /* Columna derecha más compacta */
+  .section-right{
+    flex: 0 1 32%;         /* antes 40% */
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Logo más ancho, pero que siga centrado */
+  .logo-marca{
+    width: min(640px, 100%);
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* AQUÍ está lo importante:
+     La imagen debe ocupar TODO el ancho disponible en la columna izquierda */
+  .login-img{
+    width: 100%;           /* <-- clave */
+    max-width: 100%;       /* <-- evita límites artificiales */
+    height: auto;
+
+    /* control de alto para no generar overflow vertical */
+    max-height: 70vh;
+
+    /* si desea que NO recorte nada, cambie a contain */
+    object-fit: cover;
+    display: block;
+
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* El contenedor de la imagen también debe permitir crecer */
+  .content{
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* Form: limite razonable para que no se vea exageradamente ancho */
+  .form-login{
+    max-width: 640px;
+  }
+}
+
+/* =========================
+   10) DESKTOP Más bajo
+   - Reduce imagen para evitar overflow vertical
+   ========================= */
+@media (min-width: $bp-desktop) and (max-height: 800px){
+  .wrapper{
+    padding: 1.25rem;
+    gap: 2rem;
+  }
+
+  .login-img{
+    max-height: 52vh;     /* <-- baja el alto permitido */
+    width: min(760px, 100%);
+  }
+
+  .footer-desktop{
+    padding: 0.25rem 0;
+  }
+}
+
+/* =========================
+   11) DESKTOP MUY ANCHO (>=1200)
+   - Opcional: si quiere aún más “impacto” en monitores grandes
+   ========================= */
+@media (min-width: $bp-wide){
+  .login-img{
+    width: min(980px, 100%);
+  }
+}

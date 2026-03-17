@@ -1,0 +1,81 @@
+
+// Include theming for Angular Material with `mat.theme()`.
+// This Sass mixin will define CSS variables that are used for styling Angular Material
+// components according to the Material 3 design spec.
+// Learn more about theming and how to use it for your application's
+// custom components at https://material.angular.dev/guide/theming
+@use '@angular/material' as mat;
+
+html {
+  @include mat.theme((
+    color: (
+      primary: mat.$azure-palette,
+      tertiary: mat.$blue-palette,
+    ),
+    typography: Roboto,
+    density: 0,
+  ));
+}
+
+/* =========================================================
+   Fuentes principales
+   ========================================================= */
+@font-face {
+  font-family: 'Avenir-Bold';
+  src: url('assets/fonts/AvenirNextLTPro-Bold.eot');
+  src:
+    url('assets/fonts/AvenirNextLTPro-Bold.eot?#iefix') format('embedded-opentype'),
+    url('assets/fonts/AvenirNextLTPro-Bold.woff2') format('woff2'),
+    url('assets/fonts/AvenirNextLTPro-Bold.woff') format('woff'),
+    url('assets/fonts/AvenirNextLTPro-Bold.ttf') format('truetype'),
+    url('assets/fonts/AvenirNextLTPro-Bold.svg#AvenirNextLTPro-Bold') format('svg');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Avenir';
+  src: url('assets/fonts/AvenirNextLTPro-Regular.eot');
+  src:
+    url('assets/fonts/AvenirNextLTPro-Regular.eot?#iefix') format('embedded-opentype'),
+    url('assets/fonts/AvenirNextLTPro-Regular.woff2') format('woff2'),
+    url('assets/fonts/AvenirNextLTPro-Regular.woff') format('woff'),
+    url('assets/fonts/AvenirNextLTPro-Regular.ttf') format('truetype'),
+    url('assets/fonts/AvenirNextLTPro-Regular.svg#AvenirNextLTPro-Regular') format('svg');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* =========================================================
+   Base global
+   ========================================================= */
+html, body {
+  height: 100%;
+}
+
+body {
+  min-height: 100dvh; /* mejor comportamiento móvil */
+  margin: 0;
+  font-family: Avenir, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+/* Títulos */
+h1, h2, h3, h4 {
+  font-family: Avenir, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  margin: 0;
+}
+
+/* =========================================================
+   Feedback de error (global opcional)
+   ========================================================= */
+.invalid-feedback {
+  display: block;
+  width: 100%;
+  margin-top: 0.25rem;
+  margin-bottom: 0.75rem;
+  color: #CD0000;
+  font-size: 0.875rem;
+}
+
